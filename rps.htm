@@ -1,0 +1,44 @@
+<script>
+let options=["rock","paper","scissors"];
+
+function computerPlay () {
+    return Math.floor(Math.random()*3);
+}
+
+function playRound (option1, option2) {
+//    let outcomes = ["win","draw","lose"];
+    if (option1===option2) outcome=1;
+    else if (option1<option2||option1===2&&option2===0) outcome=2;
+    else outcome=0;
+    if (outcome==0) return([outcome, "You win: "+options[option1]+" wins over "+options[option2]+"!"]);
+    else if (outcome==2) return([outcome, "You lose: "+options[option2]+" wins over "+options[option1]+"!"]);
+    else return([outcome, "No one wins: a draw of "+options[option1]+"s!"]);
+}
+
+function figureOption (userText) {
+    for (i=0; i<3; i++)
+        if (userText.toLowerCase()===options[i])
+            return i;
+    return None;
+}
+
+function game () {
+    const ROUNDS=5;
+    let wins=0;
+    let draws=0;
+    for (let i=0; i<ROUNDS;i++) {
+        playerSelection = figureOption(prompt("Rock, paper or scissors?"));
+        computerSelection = computerPlay();
+        outcome = playRound(playerSelection, computerSelection);
+        if (outcome[0]===0)wins++;
+        if (outcome[0]===1)draws++;
+        console.log(outcome[1]);
+        console.log(i);
+    }
+    console.log("Youve got "+wins+" wins, "+draws+" draws and "+(ROUNDS-wins-draws)+" loses.");
+    if (wins>2) console.log("Congrats!");
+    else console.log("Better luck next time!");
+}
+
+game();
+</script>
